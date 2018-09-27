@@ -41,7 +41,7 @@ class ImageResults extends Component {
   }
 }
 
-ImageResults.PropTypes = {
+ImageResults.propTypes = {
   images: PropTypes.array.isRequired
 }
 
