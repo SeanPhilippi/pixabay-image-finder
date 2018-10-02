@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import axios from 'axios';
 import ImageResults from '../image-results/ImageResults';
 
 class Search extends Component {
@@ -14,22 +13,22 @@ class Search extends Component {
     images: []
   }
 
+  handleSearch = () => {
+    const {searchText, amount, apiUrl, apiKey} = this.state;
+    fetch(`${apiUrl}/?key=${apiKey}&q=${searchText}&image_type=photo&per_page=${amount}&safesearch=true`)
+    .then(res => res.json())
+    .then(res => this.setState({images: res.hits}))
+    .catch(err => console.error(err))
+  }
+
   onTextChange = e => {
-    const val = e.target.value;
-    this.setState({[e.target.name]: val}, () => {
-      if (val === '') {
-        this.setState({images: []});
-      } else {
-        axios.get(`${this.state.apiUrl}/?key=${this.state.apiKey}
-          &q=${this.state.searchText}&image_type=photo&per_page=${this.state.amount}
-          &safesearch=true`
-        )
-          // res = response for request.  setting images prop in state to res.data then hits
-          // since that is where the image array is located
-        .then(res => this.setState({images: res.data.hits}))
-        .catch(err => console.log(err))
-      }
-    })
+    this.setState({searchText: e.target.value})
+  }
+
+  onKeyUp = e => {
+    if (e.key === 'Enter') {
+      this.handleSearch()
+    }
   }
 
   onAmountChange = (e, index, value) => this.setState({amount: value});
@@ -37,11 +36,12 @@ class Search extends Component {
   render() {
     console.log(this.state.images);
     return (
-      <div>
+      <div style={{ marginLeft: '10px', marginRight: '10px' }}>
         <TextField
           name="searchText"
           value={this.state.searchText}
           onChange={this.onTextChange}
+          onKeyUp={this.onKeyUp}
           floatingLabelText="Search For Images"
           fullWidth={true}
         />
@@ -60,7 +60,7 @@ class Search extends Component {
         </SelectField>
         <br/>
         {this.state.images.length > 0 ? (
-          <ImageResults images={this.state.images}/>) : null}
+          <ImageResults images={this.state.images}/> ) : null}
       </div>
     )
   }
