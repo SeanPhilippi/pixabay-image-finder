@@ -6,7 +6,7 @@ import ZoomIn from 'material-ui/svg-icons/action/zoom-in';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
-class ImageResults extends Component {
+class ImageResults extends Component { 
   state = {
     // open is a prop that toggles from 'true' to 'false' for Dialog material-ui component
     open: false,

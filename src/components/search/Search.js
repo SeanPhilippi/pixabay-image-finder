@@ -7,7 +7,7 @@ import debounce from '../debounce.js';
 
 class Search extends Component {
   state = {
-    searchText: '',
+    searchText: '', 
     amount: 15,
     apiUrl: 'https://pixabay.com/api',
     apiKey: '10219055-321f53f88e82aca8e21dc02d4',
