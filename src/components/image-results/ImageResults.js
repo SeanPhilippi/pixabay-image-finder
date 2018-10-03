@@ -8,7 +8,9 @@ import FlatButton from 'material-ui/FlatButton';
 
 class ImageResults extends Component {
   state = {
+    // open is a prop that toggles from 'true' to 'false' for Dialog material-ui component
     open: false,
+    // prop that contains url for enlarged image in the Dialog component
     currentImg: ''
   }
 
@@ -22,11 +24,15 @@ class ImageResults extends Component {
 
   render() {
     let imageListContent;
+    // pulls images out of this.props so I don't have to use 'this.'
     const { images } = this.props;
 
     if (images) {
       imageListContent = (
+        // setting columns to 3
         <GridList cols={3}>
+          {/*mapping through images array and using api props in GridTile material-ui
+            components*/}
           {images.map(img => (
             <GridTile
               title={img.tags}
@@ -37,12 +43,13 @@ class ImageResults extends Component {
                 </span>
               }
               actionIcon={
+                // set url of currentImg prop of state to largeImageURL prop of img from api
                 <IconButton onClick={() => this.handleOpen(img.largeImageURL)}>
                   <ZoomIn color="white"/>
                 </IconButton>
               }
             >
-              <img src={img.largeImageURL} alt=""/>
+              <img src={img.largeImageURL}/>
             </GridTile>
           ))}
         </GridList>
@@ -58,10 +65,14 @@ class ImageResults extends Component {
     return <div>
       {imageListContent}
       <Dialog
+        // insertig FlatButton material-ui component equal to actions
         actions={actions}
         modal={false}
+        // sets open prop to open prop value of state
         open={this.state.open}
+        // uses function to change open prop in state to false, closing the window
         onRequestClose={this.handleClose}>
+        {/*assigns img src to currentImg prop's url*/}
         <img src={this.state.currentImg} alt="" style={{ width: '100%' }}/>
       </Dialog>
     </div>

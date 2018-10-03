@@ -15,14 +15,20 @@ class Search extends Component {
   }
 
   handleSearch = () => {
+    // makes it so I can refer to props without using "this."
     const {searchText, amount, apiUrl, apiKey} = this.state;
     fetch(`${apiUrl}/?key=${apiKey}&q=${searchText}&image_type=photo&per_page=${amount}&safesearch=true`)
+    // conerting response from json to javascript
     .then(res => res.json())
+    // hits is array contained in response with image objects
     .then(res => this.setState({images: res.hits}))
     .catch(err => console.error(err))
   }
 
   onTextChange = e => {
+    // e.target.value gives the value where the event is being called, which is
+    // in TextField's onChange prop.  so searchText within state will be set to
+    // whatever text is entered.
     this.setState({searchText: e.target.value});
     this.handleDelay()
     // debounce(this.handleSearch, 2000)();
@@ -36,11 +42,13 @@ class Search extends Component {
   // }, 500)
 
   onKeyUp = e => {
+    // if key 'Enter' is pressed, execute handleSearch()
     if (e.key === 'Enter') {
       this.handleSearch()
     }
   }
-
+  // function for onChange in SelectField component, changes value prop of SelectField
+  // to whatever value is selected
   onAmountChange = (e, index, value) => this.setState({amount: value});
 
   render() {
@@ -69,6 +77,8 @@ class Search extends Component {
           <MenuItem value={50} primaryText="50"/>
         </SelectField>
         <br/>
+        {/*if number of iamges in state is greater than 0, return imageResults component,
+          else do nothing*/}
         {this.state.images.length > 0 ? (
           <ImageResults images={this.state.images}/> ) : null}
       </div>
