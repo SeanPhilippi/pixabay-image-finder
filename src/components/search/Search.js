@@ -3,6 +3,7 @@ import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import ImageResults from '../image-results/ImageResults';
+import debounce from '../debounce.js';
 
 class Search extends Component {
   state = {
@@ -22,8 +23,17 @@ class Search extends Component {
   }
 
   onTextChange = e => {
-    this.setState({searchText: e.target.value})
+    this.setState({searchText: e.target.value});
+    this.handleDelay()
+    // debounce(this.handleSearch, 2000)();
   }
+
+  handleDelay = debounce(this.handleSearch, 2000)
+
+  // handleDelay = debounce((e) => {
+  //   const displayedImgs = this.handleSearch();
+  //   this.setState({ images: displayedImgs });
+  // }, 500)
 
   onKeyUp = e => {
     if (e.key === 'Enter') {
