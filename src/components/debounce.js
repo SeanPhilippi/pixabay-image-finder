@@ -3,7 +3,7 @@ const debounce = (func, wait, immediate) => {
 
   return function executeFunction() {
     const context = this;
-    const args = arguments; 
+    const args = arguments;
 
     const later = () => {
       timeout = null;
@@ -11,7 +11,7 @@ const debounce = (func, wait, immediate) => {
       if (!immediate) func.apply(context, args);
     }
 
-    const callNow = () => immediate && !timeout;
+    const callNow = immediate && !timeout;
 
     clearTimeout(timeout);
 
