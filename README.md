@@ -6,7 +6,7 @@ Image finder using PixaBay's api, Material-ui, Axios, and React.
 
 ## Deployment
 
-This site is deployed via GitHub Pages.
+This site is deployed using GitHub Pages.
 
 ## Upcoming
 
