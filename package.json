@@ -1,6 +1,6 @@
 {
   "name": "pixabay-image-finder",
-  "homepage": "https://sean.philippi.github.io/pixabay-image-finder",
+  "homepage": "https://sean.philippi.github.io/pixabay-image-finder/public",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
