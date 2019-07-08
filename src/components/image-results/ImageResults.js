@@ -7,7 +7,7 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
 class ImageResults extends Component {
-  state = {
+  state = { 
     // open is a prop that toggles from 'true' to 'false' for Dialog material-ui component
     open: false,
     // prop that contains url for enlarged image in the Dialog component

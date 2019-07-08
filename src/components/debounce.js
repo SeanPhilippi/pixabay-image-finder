@@ -11,7 +11,7 @@ const debounce = (func, wait, immediate) => {
       if (!immediate) func.apply(context, args);
     }
 
-    const callNow = () => immediate && !timeout;
+    const callNow = immediate && !timeout;
 
     clearTimeout(timeout);
 
